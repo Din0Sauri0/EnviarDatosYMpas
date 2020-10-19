@@ -26,6 +26,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        //obtener los datos enviados a travez del intent
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         Latitud = bundle.getFloat("Latitud");
@@ -49,8 +50,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(Latitud, Longitud);
-        mMap.addMarker(new MarkerOptions().position(sydney).title(Nombre));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng lugar = new LatLng(this.Latitud, this.Longitud);
+        mMap.addMarker(new MarkerOptions().position(lugar).title(Nombre));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lugar,20));
+        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setCompassEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
     }
 }

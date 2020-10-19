@@ -31,12 +31,19 @@ public class MainActivity extends AppCompatActivity {
                 Lat = Float.parseFloat(txtLatitud.getText().toString());
                 Long = Float.parseFloat(txtLongitud.getText().toString());
                 Nombre = txtNombre.getText().toString();
-
+                //enviar datos atraves de los Intent.
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                 intent.putExtra("Latitud", Lat);
                 intent.putExtra("Longitud", Long);
                 intent.putExtra("Nombre", Nombre);
                 startActivity(intent);
+            }
+        });
+
+        btnLimpiar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
