@@ -1,8 +1,12 @@
 package com.ovalle.enviardatosympas;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,6 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //obtener los datos enviados a travez del intent
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+
         Latitud = bundle.getFloat("Latitud");
         Longitud = bundle.getFloat("Longitud");
         Nombre = bundle.getString("Nombre");
@@ -48,14 +53,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        double latEstatica = -36.8272799;
+        double longEstatica = -73.0501144;
+        String nombreEstatico = "Plaza conce";
+        LatLng plaza = new LatLng(latEstatica, longEstatica);
         // Add a marker in Sydney and move the camera
         LatLng lugar = new LatLng(this.Latitud, this.Longitud);
         mMap.addMarker(new MarkerOptions().position(lugar).title(Nombre));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lugar,20));
-        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        mMap.addMarker(new MarkerOptions().position(plaza).title(nombreEstatico));
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lugar, 17));
+
+
+
     }
 }
